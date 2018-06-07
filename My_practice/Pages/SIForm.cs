@@ -65,7 +65,10 @@ namespace My_practice
             FillField(сustomer, item.Customer);
             FillField(сontact, item.Contact);
             FillField(assignedTo, item.AssignedTo);
-            GetActiveTab().FindElement(By.CssSelector("#Contact ~ ul>li:nth-child(1)")).Click();
+            if (driver.FindElement(By.CssSelector("#Contact ~ ul>li:nth-child(1)")).Displayed)
+            {
+                GetActiveTab().FindElement(By.CssSelector("#Contact ~ ul>li:nth-child(1)")).Click();
+            }
             FillField(summary, item.Summary);
             FillField(description, item.Description);
             SelectFromDropDown(priority, item.Severity);

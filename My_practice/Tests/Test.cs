@@ -37,7 +37,7 @@ namespace My_practice
              comTab.AddNewPublicComment("My comment");*/
             siForm.ActivateTab("Attachments");
             AttachmentsTab attTab = new AttachmentsTab(driver);
-            attTab.AddNewAttach("C:\\Users\\ddubiuk\\Desktop\\Bug.png");
+            attTab.AddNewPublicAttach("D:\\ASF_Project\\C# my project\\My_practice\\My_practice\\Files\\Bug.png");
             mainPage.Logout();
 
         }
