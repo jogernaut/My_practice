@@ -17,9 +17,18 @@ namespace My_practice
             LoginPage loginPage = new LoginPage(driver);
             loginPage.Login("jhall", "innovator");
             MainPage mainPage = new MainPage(driver);
-            waitHelper.WaitForElementIsDisplayed(mainPage.mainGrid);
-            mainPage.CreateNewItem();;
-            SIForm siForm = new SIForm(driver);         
+            //waitHelper.WaitForElementIsDisplayed(mainPage.mainGrid);
+            GridComponent grid = new GridComponent(driver);
+            // grid.GetSearchBarCell("Numbe grid.SetValueInSelectField("State", "Closed");r");
+            grid.SelectRowByPropertyValue("Number", "SI-000958");
+            grid.GetCell(1, 1);
+            grid.GetRow(2);
+            grid.SetValueInInputField("Closed On", "6/11/2018");
+            //grid.SetValueInSelectField("State", "Closed");
+            mainPage.ClickRunSearch();
+            mainPage.CreateNewItem();
+            SIForm siForm = new SIForm(driver);   
+              
             ItemData itemData = new ItemData()
             {
                 Customer = "AMC Bridge",
@@ -35,11 +44,10 @@ namespace My_practice
             siForm.SaveItem();
             /* CommentsTab comTab = new CommentsTab(driver);
              comTab.AddNewPublicComment("My comment");*/
-            siForm.ActivateTab("Attachments");
+           /* siForm.ActivateTab("Attachments");
             AttachmentsTab attTab = new AttachmentsTab(driver);
             attTab.AddNewPublicAttach("D:\\ASF_Project\\C# my project\\My_practice\\My_practice\\Files\\Bug.png");
-            mainPage.Logout();
-
+            mainPage.Logout();*/            
         }
     }
 }

@@ -8,13 +8,13 @@ namespace My_practice
 {
     public class ItemData
     {
-        public string Customer;
-        public string Contact;
+        public string Customer = "";
+        public string Contact = "";
         public string AssignedTo = "";
-        public string Summary;
-        public string Description;
-        public string Severity;
-        public string Product;
+        public string Summary = "";
+        public string Description = "";
+        public string Severity = "";
+        public string Product = "";
         public string Version = "";
     }
 }

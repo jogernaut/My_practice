@@ -4,22 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
+using System.IO;
 
 namespace My_practice
 {
-    class AttachmentsTab : SIForm
+    public class AttachmentsTab : SIForm
     {
         public AttachmentsTab(IWebDriver driver) : base(driver)
         {
         }
 
+        string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+
         #region
-        By newAttach = By.XPath("//button[@title='New Attachment']");
-        By refreshAttach = By.XPath("//button[@title='Refresh Attachments']");        
-        By closeAddAttach = By.CssSelector(".close");
-        By saveAttach = By.XPath("//button[@title='Save Attachment']");
+        By newAttachBtn = By.XPath("//button[@title='New Attachment']");
+        By refreshAttachBtn = By.XPath("//button[@title='Refresh Attachments']");        
+        By closeAddAttachBtn = By.CssSelector(".close");
+        By saveAttachBtn = By.XPath("//button[@title='Save Attachment']");
         By chooseFileBtn = By.Id("File");
-        By publishAttach = By.CssSelector("input[type=checkbox]");
+        By publishAttachCheckbox = By.CssSelector("input[type=checkbox]");
         #endregion
 
         private IWebElement GetAddAttachWindow()
@@ -46,34 +49,34 @@ namespace My_practice
 
         private void ClickAddNewAttach()
         {
-            GetActiveTab().FindElement(newAttach).Click();
+            GetActiveTab().FindElement(newAttachBtn).Click();
             waitHelper.WaitForElementIsDisplayed(By.CssSelector(".modal.fade.in"));
         }
 
         public void ClickRefreshAttachTab()
         {
-            GetActiveTab().FindElement(refreshAttach).Click();
+            GetActiveTab().FindElement(refreshAttachBtn).Click();
         }
 
         private void ClickSaveAttach()
         {
-            GetAddAttachWindow().FindElement(saveAttach).Click();
+            GetAddAttachWindow().FindElement(saveAttachBtn).Click();
             waitHelper.waitForUntilSpinnerIsDisplayed();
         }
 
         private void ClickPublishAttach()
         {
-            GetAddAttachWindow().FindElement(publishAttach).Click();
+            GetAddAttachWindow().FindElement(publishAttachCheckbox).Click();
         }
 
         public void ClickCloseAddAttachWindow()
         {
-            GetAddAttachWindow().FindElement(closeAddAttach).Click();
+            GetAddAttachWindow().FindElement(closeAddAttachBtn).Click();
         }
 
         private void SelectFile(string path)
         {
-            GetAddAttachWindow().FindElement(chooseFileBtn).SendKeys(path);
+            GetAddAttachWindow().FindElement(chooseFileBtn).SendKeys(baseDirectory + path);
         }
     }
 }

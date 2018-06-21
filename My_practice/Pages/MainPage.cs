@@ -13,14 +13,17 @@ namespace My_practice
         private WaiterHelper waitHelper;
 
         #region
-        By newItem = By.Id("addSI");
-        By runSearch = By.XPath("//button[@title='Run Search']");
-        By clearSearch = By.XPath("//button[@title='Clear Search Criteria']");
+        By newItemBtn = By.Id("addSI");
+        By runSearchBtn = By.XPath("//button[@title='Run Search']");
+        By clearSearchBtn = By.XPath("//button[@title='Clear Search Criteria']");
         By pageSize = By.XPath("//input[@title='Page Size']");
-        By previousPage = By.XPath("//button[@title='Previous Page']");
-        By nextPage = By.XPath("//button[@title='Next Page']");
-        public By logout = By.CssSelector("#logoutForm a");
-        public By mainGrid = By.Id("gridSI");
+        By previousPageBtn = By.XPath("//button[@title='Previous Page']");
+        By nextPageBtn = By.XPath("//button[@title='Next Page']");
+        By amountOfSIItem = By.XPath("//button[@title='Next Page']//following-sibling::p[2]");
+        By teamLeaderReportBtn = By.XPath("//button[@title='TeamLeader Report']");
+        By SSRSReportBtn = By.XPath("//button[@title='SSRS Report']");
+        By logoutBtn = By.CssSelector("#logoutForm a");
+        
         #endregion
 
         public MainPage(IWebDriver driver)
@@ -32,20 +35,35 @@ namespace My_practice
         public void CreateNewItem()
         {
             waitHelper.waitForUntilSpinnerIsDisplayed();                   
-            driver.FindElement(newItem).Click();
+            driver.FindElement(newItemBtn).Click();
             waitHelper.waitForUntilSpinnerIsDisplayed();
         }
 
         public void Logout()
         {
             waitHelper.waitForUntilSpinnerIsDisplayed();
-            waitHelper.waitForElementIsVisibility(logout);
-            driver.FindElement(logout).Click();
+            waitHelper.waitForElementIsVisibility(logoutBtn);
+            driver.FindElement(logoutBtn).Click();
         }
 
         public void GoToPage(string namePage)
         {
             driver.FindElement(By.XPath("//p[text()='" + namePage + "']")).Click();
+        }
+
+        public void ExpandDashboard()
+        {
+            driver.FindElement(By.XPath("//ul[@class='si sidebar-menu']//button")).Click();
+        }
+
+        public void ClickRunSearch()
+        {
+            driver.FindElement(runSearchBtn).Click();
+        }
+
+        public void ClickClearCriteria()
+        {
+            driver.FindElement(clearSearchBtn).Click();
         }
     }
 }

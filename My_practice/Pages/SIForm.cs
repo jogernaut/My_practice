@@ -16,10 +16,10 @@ namespace My_practice
         protected WaiterHelper waitHelper;
 
         #region
-        public By SINumber = By.Id("Number");
+        By SINumber = By.Id("Number");
         By state = By.Id("State");
         By createdOn = By.Id("CreatedOn");        
-        By сustomer = By.Id("Customer");
+        By customer = By.Id("Customer");
         By сontact = By.Id("Contact");
         By assignedTo = By.XPath("//input[@id='Assigned To']");
         By summary = By.Id("Summary");
@@ -27,14 +27,15 @@ namespace My_practice
         By priority = By.Id("Priority");
         By product = By.Id("Product");
         By version = By.Id("Version");
+        By closedCheckbox = By.XPath("//div[@class='checkbox']//input");
 
-        By saveButton = By.Id("saveSiBtn");
-        By lockButton = By.Id("lockBtn");
-        By unlockButton = By.Id("unlockBtn");
-        By promoteButton = By.XPath("//button[@title='Promote Item']");
-        By claimButton = By.XPath("//button[@title='Claim Item']");
-        By actionsButton = By.Id("actions");
-        By createDuplicateSIButton = By.XPath("//button[@title='Create Duplicate SI']");
+        By saveSIBtn = By.Id("saveSiBtn");
+        By lockSIBtn = By.Id("lockBtn");
+        By unlockSIBtn = By.Id("unlockBtn");
+        By promoteSIBtn = By.XPath("//button[@title='Promote Item']");
+        By claimSIBtn = By.XPath("//button[@title='Claim Item']");
+        By actionsSIBtn = By.Id("actions");
+        By createDuplicateSIBtn = By.XPath("//button[@title='Create Duplicate SI']");
         #endregion
 
         public SIForm(IWebDriver driver)
@@ -49,20 +50,20 @@ namespace My_practice
             return newForm;
         }
 
-        public void FillField(By locator, string text)
+        private void FillField(By locator, string text)
         {
             GetActiveTab().FindElement(locator).Clear();
             GetActiveTab().FindElement(locator).SendKeys(text);
         }
 
-        public void SelectFromDropDown(By locator, string option)
+        private void SelectFromDropDown(By locator, string option)
         {
             new SelectElement(GetActiveTab().FindElement(locator)).SelectByText(option);
         }
 
         public void FillForm(ItemData item)
         {
-            FillField(сustomer, item.Customer);
+            FillField(customer, item.Customer);
             FillField(сontact, item.Contact);
             FillField(assignedTo, item.AssignedTo);
             if (driver.FindElement(By.CssSelector("#Contact ~ ul>li:nth-child(1)")).Displayed)
@@ -77,40 +78,42 @@ namespace My_practice
             SelectFromDropDown(version, item.Version);
         }
 
-        public void SaveItem()
+        public string SaveItem()
         {
-            GetActiveTab().FindElement(saveButton).Click();
+            GetActiveTab().FindElement(saveSIBtn).Click();
             waitHelper.waitForUntilSpinnerIsDisplayed();
+            string siNumber = GetValueFromField(SINumber);
+            return siNumber;
         }
 
         public void LockItem()
         {
-            GetActiveTab().FindElement(lockButton).Click();
+            GetActiveTab().FindElement(lockSIBtn).Click();
         }
 
         public void UnlockItem()
         {
-            GetActiveTab().FindElement(unlockButton).Click();
+            GetActiveTab().FindElement(unlockSIBtn).Click();
         }
 
         public void PromoteItem()
         {
-            GetActiveTab().FindElement(promoteButton).Click();
+            GetActiveTab().FindElement(promoteSIBtn).Click();
         }
 
         public void ClaimItem()
         {
-            GetActiveTab().FindElement(claimButton).Click();
+            GetActiveTab().FindElement(claimSIBtn).Click();
         }
 
         public void ClickActions()
         {
-            GetActiveTab().FindElement(actionsButton).Click();
+            GetActiveTab().FindElement(actionsSIBtn).Click();
         }
 
         public void CreateDuplicateSI()
         {
-            GetActiveTab().FindElement(createDuplicateSIButton).Click();
+            GetActiveTab().FindElement(createDuplicateSIBtn).Click();
         }
 
         public void CloseItem()

@@ -17,6 +17,7 @@ namespace My_practice
         private string baseURL;
         private bool acceptNextAlert = true;
         protected WaiterHelper waitHelper;
+        private Helper helper;
 
         [SetUp]
         public void SetupTest()
@@ -28,7 +29,7 @@ namespace My_practice
             driver = new ChromeDriver(choptions);
             waitHelper = new WaiterHelper(driver);
             baseURL = "http://192.168.168.205/";
-            driver.Navigate().GoToUrl(baseURL + "/SupportIncident_2.3.10/");
+            driver.Navigate().GoToUrl(baseURL + "/SupportIncident_2.3.11/");
             verificationErrors = new StringBuilder();
         }
         
@@ -49,6 +50,9 @@ namespace My_practice
             }
            
             Assert.AreEqual("", verificationErrors.ToString());
+
+            helper = new Helper(driver);
+            helper.SqlExecute("Files\\DeleteSIItem.sql");
         }
         
         

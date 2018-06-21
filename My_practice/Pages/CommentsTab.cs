@@ -14,15 +14,19 @@ namespace My_practice
         }
 
         #region
-        By newComment = By.XPath("//button[@title='New Comment']");
-        By refreshComment = By.XPath("//button[@title='Refresh Comments']");
-        By previousPage = By.XPath("//button[@title='Previous Page']");
-        By nextPage = By.XPath("//button[@title='Next Page']");
-        By closeAddWindow = By.CssSelector(".close");
-        By saveComment = By.XPath("//button[@title='Save/Update Comment']");
-        By clearComment = By.XPath("//button[@title='Clear Comment']");
+        By newCommentBtn = By.XPath("//button[@title='New Comment']");
+        By refreshCommentBtn = By.XPath("//button[@title='Refresh Comments']");
+        By previousPageBtn = By.XPath("//button[@title='Previous Page']");
+        By nextPageBtn = By.XPath("//button[@title='Next Page']");
+        By closeAddWindowBtn = By.CssSelector(".close");
+        By saveCommentBtn = By.XPath("//button[@title='Save/Update Comment']");
+        By clearCommentBtn = By.XPath("//button[@title='Clear Comment']");
         By commentField = By.Id("Comment");
-        By publishComment = By.CssSelector("input[type=checkbox]");
+        By publishCommentCheckbox = By.CssSelector("input[type=checkbox]");
+        By deleteCommentBtn = By.XPath("//button[@title='Delete Comment']");
+        By lockCommentBtn = By.Id("lockBtn");
+        By unlockCommentBtn = By.Id("unlockBtn");
+        By editCommentBtn = By.XPath("//button[@title='Edit Comment']");        
         #endregion
 
         private IWebElement GetAddCommentWindow()
@@ -49,18 +53,18 @@ namespace My_practice
 
         public void ClickCloseAddCommentWindow()
         {
-            GetAddCommentWindow().FindElement(closeAddWindow).Click();
+            GetAddCommentWindow().FindElement(closeAddWindowBtn).Click();
         }
 
         private void ClickSaveComment()
         {
-            GetAddCommentWindow().FindElement(saveComment).Click();
+            GetAddCommentWindow().FindElement(saveCommentBtn).Click();
             waitHelper.waitForUntilSpinnerIsDisplayed();
         }
 
         public void ClickClearComment()
         {
-            GetAddCommentWindow().FindElement(clearComment).Click();
+            GetAddCommentWindow().FindElement(clearCommentBtn).Click();
         }
 
         private void FillCommentField(string text)
@@ -71,28 +75,28 @@ namespace My_practice
 
         private void ClickPublishComment()
         {
-            GetAddCommentWindow().FindElement(publishComment).Click();
+            GetAddCommentWindow().FindElement(publishCommentCheckbox).Click();
         }
 
         private void ClickAddNewComment()
         {
-            GetActiveTab().FindElement(newComment).Click();
+            GetActiveTab().FindElement(newCommentBtn).Click();
             waitHelper.WaitForElementIsDisplayed(By.CssSelector(".modal.fade.in"));
         }
 
         public void ClickRefreshCommentsTab()
         {
-            GetActiveTab().FindElement(refreshComment).Click();
+            GetActiveTab().FindElement(refreshCommentBtn).Click();
         }
 
         public void GoToPriviousPage()
         {
-            GetActiveTab().FindElement(previousPage).Click();
+            GetActiveTab().FindElement(previousPageBtn).Click();
         }
 
         public void GoToNextPage()
         {
-            GetActiveTab().FindElement(nextPage).Click();
+            GetActiveTab().FindElement(nextPageBtn).Click();
         }
     }
 }
