@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,13 +19,13 @@ namespace My_practice
             loginPage.Login("jhall", "innovator");
             MainPage mainPage = new MainPage(driver);
             //waitHelper.WaitForElementIsDisplayed(mainPage.mainGrid);
-            GridComponent grid = new GridComponent(driver);
+          /*  GridComponent grid = new GridComponent(driver);
             // grid.GetSearchBarCell("Numbe grid.SetValueInSelectField("State", "Closed");r");
             grid.SelectRowByPropertyValue("Number", "SI-000958");
             grid.GetCell(1, 1);
             grid.GetRow(2);
             grid.SetValueInInputField("Closed On", "6/11/2018");
-            //grid.SetValueInSelectField("State", "Closed");
+            //grid.SetValueInSelectField("State", "Closed");*/
             mainPage.ClickRunSearch();
             mainPage.CreateNewItem();
             SIForm siForm = new SIForm(driver);   
@@ -33,7 +34,7 @@ namespace My_practice
             {
                 Customer = "AMC Bridge",
                 Contact = "Alexandr Ivashina",
-                AssignedTo = "Dave Rolle",
+                AssignedTo = "Jake Hall",
                 Summary = "test_summary",
                 Description = "test_description",
                 Severity = "Level 1",
@@ -41,13 +42,22 @@ namespace My_practice
                 Version = "11.0 SP2"
             };
             siForm.FillForm(itemData);            
-            siForm.SaveItem();
+            string siNumber = siForm.SaveItem();
+            siForm.CloseItem();
+            mainPage.GoToPage("Dashboard");
+            DashboardKanban dsbrdKnbn = new DashboardKanban(driver);
+            dsbrdKnbn.MoveSIToActiveColumn(siNumber);
+            dsbrdKnbn.MoveSIToOpenColumn(siNumber);
+
             /* CommentsTab comTab = new CommentsTab(driver);
              comTab.AddNewPublicComment("My comment");*/
-           /* siForm.ActivateTab("Attachments");
-            AttachmentsTab attTab = new AttachmentsTab(driver);
-            attTab.AddNewPublicAttach("D:\\ASF_Project\\C# my project\\My_practice\\My_practice\\Files\\Bug.png");
-            mainPage.Logout();*/            
+            /* siForm.ActivateTab("Attachments");
+             AttachmentsTab attTab = new AttachmentsTab(driver);
+             attTab.AddNewPublicAttach("D:\\ASF_Project\\C# my project\\My_practice\\My_practice\\Files\\Bug.png");
+             mainPage.Logout();*/
+
+           
+
         }
     }
 }

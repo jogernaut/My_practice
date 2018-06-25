@@ -49,6 +49,7 @@ namespace My_practice
         public void GoToPage(string namePage)
         {
             driver.FindElement(By.XPath("//p[text()='" + namePage + "']")).Click();
+            waitHelper.waitForUntilSpinnerIsDisplayed();
         }
 
         public void ExpandDashboard()
@@ -58,7 +59,9 @@ namespace My_practice
 
         public void ClickRunSearch()
         {
+            waitHelper.WaitForElementIsDisplayed(runSearchBtn);
             driver.FindElement(runSearchBtn).Click();
+            waitHelper.waitForUntilSpinnerIsDisplayed();
         }
 
         public void ClickClearCriteria()

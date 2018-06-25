@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using System;
 using System.Data.SqlClient;
 using System.IO;
@@ -68,8 +69,11 @@ namespace My_practice
                 SqlCommand command = new SqlCommand(query, conn);
                 conn.Open();
                 command.ExecuteReader();
-                conn.Close();
+                conn.Close();        
             }
+        
+              /*   Actions builder = new Actions(driver);
+          builder.ContextClick(GetActiveTab().FindElement(saveSIBtn)).SendKeys(Keys.ArrowDown).Perform();*/
 
             /* // When testing a long web page with some controls that are not visible, trying to click them might throw an Element Is Not Visible
                 //error. In that case, setting the focus on the element might make it visible
